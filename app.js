@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session({
   secret: 'secret-key',
   resave: true,
@@ -51,17 +52,13 @@ passport.deserializeUser(function(user, done) {
 
 
 app.use('/', indexRouter);
-app.use('/success', usersRouter);
+app.use('/auth/success', usersRouter);
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', { failureRedirect: '/?auth_failed' }), 
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/?auth_failed' }),
   function (req, res) {
-    res.redirect('/success');
+      res.redirect('/auth/success');
   });
-
-
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
