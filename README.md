@@ -2,8 +2,8 @@
 Express,twitter-oauth,passport のサンプルプログラムです
 
 ## usage
-create twitter apps, write ./config.js
-https://apps.twitter.com/app/new
+vi config.js
+https://apps.twitter.com/en/apps
 ```sh
 exports.consumerKey = '';
 exports.consumerSecret = '';
